@@ -13,6 +13,11 @@ export default function Home() {
   const { user, authenticate } = useAuthStore() as any;
 
   const [image, setimage] = useState<null | string>(null);
+  const [doeImage, setDoeImage] = useState<null | string>(null);
+  const [businessPermitImage, setBusinessPermitImage] = useState<null | string>(null);
+  const [fireSafetyPermitImage, setFireSafetyPermitImage] = useState<null | string>(null);
+  const [agreementImage, setAgreementImage] = useState<null | string>(null);
+
   const [formData, setFormData] = useState({
     name: "",
     contactNumber: "",
@@ -38,12 +43,50 @@ export default function Home() {
       setimage(data.data[0]?.path ?? "");
     }
   };
+  const fileChange1 = async (event: any) => {
+    const form = new FormData();
+    form.append("image", event.target.files[0]);
+    const { data } = await post<FormData>("upload/image", form);
+    if (data.status === "success") {
+      setDoeImage(data.data[0]?.path ?? "");
+    }
+  };
+
+  const fileChange2 = async (event: any) => {
+    const form = new FormData();
+    form.append("image", event.target.files[0]);
+    const { data } = await post<FormData>("upload/image", form);
+    if (data.status === "success") {
+      setBusinessPermitImage(data.data[0]?.path ?? "");
+    }
+  };
+
+  const fileChange3 = async (event: any) => {
+    const form = new FormData();
+    form.append("image", event.target.files[0]);
+    const { data } = await post<FormData>("upload/image", form);
+    if (data.status === "success") {
+      setFireSafetyPermitImage(data.data[0]?.path ?? "");
+    }
+  };
+
+  const fileChange4 = async (event: any) => {
+    const form = new FormData();
+    form.append("image", event.target.files[0]);
+    const { data } = await post<FormData>("upload/image", form);
+    if (data.status === "success") {
+      setAgreementImage(data.data[0]?.path ?? "");
+    }
+  };
 
   const handleSubmit = async () => {
     try {
       const { data } = await post(`users`, {
         ...formData,
-        image,
+        doe: doeImage,
+        businessPermit: businessPermitImage,
+        fireSafetyPermit: fireSafetyPermitImage,
+        agreement: agreementImage,
         type: "Retailer",
       });
 
@@ -79,7 +122,7 @@ export default function Home() {
           <div className="col-span-2">
             <InputField
               type="file"
-              placeholder="Choose Image"
+              placeholder="Upload Image"
               onChange={fileChange}
             />
           </div>
@@ -115,7 +158,36 @@ export default function Home() {
               placeholder="Password"
               onChange={handleChange}
             />
-          </div>{" "}
+          </div>
+          <div className="col-span-2">
+            <InputField
+              type="file"
+              placeholder="Upload DOE License"
+              onChange={fileChange1}
+            />
+          </div>
+          <div className="col-span-2">
+            <InputField
+              type="file"
+              placeholder="Upload Business Permit"
+              onChange={fileChange2}
+            />
+          </div>
+          <div className="col-span-2">
+            <InputField
+              type="file"
+              placeholder="Upload Fire Safety Certificate"
+              onChange={fileChange3}
+            />
+          </div>
+          <div className="col-span-2">
+            <InputField
+              type="file"
+              placeholder="Agreement"
+              onChange={fileChange4}
+            />
+          </div>
+          {" "}
           <div className="col-span-2 flex gap-2">
             <input type={"checkbox"} onChange={handlePrivacy}></input>
             <p>I accept the terms and agreements of data privacy</p>
