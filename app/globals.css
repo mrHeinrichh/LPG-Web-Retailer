@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(197, 197, 197);
+  border-radius: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  background: white;
+  min-height: 100vh;
+}
+
+h1 {
+  @apply text-h1;
+}
+
+h2 {
+  @apply text-h2;
+}
+
+h3 {
+  @apply text-h3;
+}
+
+h4 {
+  @apply text-h4;
+}
+
+h5 {
+  @apply text-h5;
+}
+
+.products {
+  padding: 50px;
+}
+
+.bg-black {
+  background-color: black;
+  height: 190px;
+  padding: 20px;
+}
+.item-card {
+  background-color: white;
+  margin-top: 25px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.item-image {
+  border-radius: 8px 8px 0 0;
+}
+
+.item-details {
+  cursor: pointer;
+  text-align: left;
+}
+.header-image {
+  position: relative;
+  height: 900px;
+}
