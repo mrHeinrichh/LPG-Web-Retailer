@@ -47,6 +47,7 @@ import { FaRegMessage } from "react-icons/fa6";function Navbar() {
               >
                 FAQ&apos;s {/* Updated to use HTML entity */}
               </p>
+             
               <p
                 className={style.navItem}
                 onClick={() => logout()}

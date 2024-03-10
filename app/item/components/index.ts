@@ -1,2 +1,4 @@
 import ReasonsTable from "./ReasonsTable";
-export { ReasonsTable };
+import ItemDetails from "./ItemDetails";
+import ForecastChart from "./ForecastChart";
+export { ForecastChart, ItemDetails, ReasonsTable };

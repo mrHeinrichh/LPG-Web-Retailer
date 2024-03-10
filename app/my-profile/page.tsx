@@ -67,7 +67,7 @@ export default function MyProfile() {
 
       if (data.status === "success") router.push("/");
     } catch (error) {
-      console.error("Error adding retailers:", error);
+      console.error("Error adding Retailers:", error);
     }
   };
 
@@ -85,7 +85,7 @@ export default function MyProfile() {
         router.push("/");
       }
     } catch (error) {
-      console.error("Error adding retailers:", error);
+      console.error("Error adding Retailers:", error);
     }
   };
 
@@ -96,7 +96,7 @@ export default function MyProfile() {
       });
       if (data.status === "success") router.push("/");
     } catch (error) {
-      console.error("Error adding retailers:", error);
+      console.error("Error adding Retailers:", error);
     }
   };
 
@@ -104,6 +104,7 @@ export default function MyProfile() {
     <main>
       <Navbar />
       
+     
       <div className="col-span-2 flex justify-center">
         <form className={style.form}>
           <div className="col-span-3">
@@ -171,20 +172,12 @@ export default function MyProfile() {
               Change Password
             </ChangePasswordButton>
           </div>
-        
-       
-
           <div className="flex justify-center col-span-2">
             <UpdateProfileButton type="button" onClick={handleSubmit}>
               Update Profile
             </UpdateProfileButton>
             
-          </div>
-
-      
-         
-           
-         
+          </div>   
         </form>
       </div>
     </main>

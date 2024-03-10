@@ -39,10 +39,12 @@ export default function Home() {
     const form = new FormData();
     form.append("image", event.target.files[0]);
     const { data } = await post<FormData>("upload/image", form);
+    console.log("File Change Response:", data); // Add this line for debugging
     if (data.status === "success") {
       setimage(data.data[0]?.path ?? "");
     }
   };
+  
   const fileChange1 = async (event: any) => {
     const form = new FormData();
     form.append("image", event.target.files[0]);
@@ -83,19 +85,21 @@ export default function Home() {
     try {
       const { data } = await post(`users`, {
         ...formData,
+        image,  // Include the 'image' field in the request
         doe: doeImage,
         businessPermit: businessPermitImage,
         fireSafetyPermit: fireSafetyPermitImage,
         agreement: agreementImage,
-        type: "Retailer",
+        __t: "Retailer",
       });
-
+  
       console.log(data);
       if (data.status === "success") router.push("/");
     } catch (error) {
       console.error("Error adding retailers:", error);
     }
   };
+  
 
   const handlePrivacy = async (event: any) => {
     console.log(event.target.value);
