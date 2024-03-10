@@ -16,7 +16,7 @@ export default function Home() {
   const [doeImage, setDoeImage] = useState<null | string>(null);
   const [businessPermitImage, setBusinessPermitImage] = useState<null | string>(null);
   const [fireSafetyPermitImage, setFireSafetyPermitImage] = useState<null | string>(null);
-  const [agreementImage, setAgreementImage] = useState<null | string>(null);
+  // const [agreementImage, setAgreementImage] = useState<null | string>(null);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -72,14 +72,14 @@ export default function Home() {
     }
   };
 
-  const fileChange4 = async (event: any) => {
-    const form = new FormData();
-    form.append("image", event.target.files[0]);
-    const { data } = await post<FormData>("upload/image", form);
-    if (data.status === "success") {
-      setAgreementImage(data.data[0]?.path ?? "");
-    }
-  };
+  // const fileChange4 = async (event: any) => {
+  //   const form = new FormData();
+  //   form.append("image", event.target.files[0]);
+  //   const { data } = await post<FormData>("upload/image", form);
+  //   if (data.status === "success") {
+  //     setAgreementImage(data.data[0]?.path ?? "");
+  //   }
+  // };
 
   const handleSubmit = async () => {
     try {
@@ -89,7 +89,7 @@ export default function Home() {
         doe: doeImage,
         businessPermit: businessPermitImage,
         fireSafetyPermit: fireSafetyPermitImage,
-        agreement: agreementImage,
+        // agreement: agreementImage,
         __t: "Retailer",
       });
   
@@ -184,13 +184,13 @@ export default function Home() {
               onChange={fileChange3}
             />
           </div>
-          <div className="col-span-2">
+          {/* <div className="col-span-2">
             <InputField
               type="file"
               placeholder="Agreement"
               onChange={fileChange4}
             />
-          </div>
+          </div> */}
           {" "}
           <div className="col-span-2 flex gap-2">
             <input type={"checkbox"} onChange={handlePrivacy}></input>
