@@ -34,7 +34,7 @@ export default create<ICartStore>((set) => ({
       );
       const total = selected.reduce(
         (total: number, item: ICartItemModel) =>
-          total + item.retailerPrice * item.quantity,
+          total + item.customerPrice * item.quantity,
         0
       );
       return {
@@ -55,7 +55,7 @@ export default create<ICartStore>((set) => ({
       const selected = [...state.selected, item];
       const total = selected.reduce(
         (total: number, item: any) =>
-          total + item.retailerPrice * item.quantity,
+          total + item.customerPrice * item.quantity,
         0
       );
       return {
@@ -71,7 +71,7 @@ export default create<ICartStore>((set) => ({
       );
       const total = filtered.reduce(
         (total: number, item: any) =>
-          total + item.retailerPrice * item.quantity,
+          total + item.customerPrice * item.quantity,
         0
       );
       return {

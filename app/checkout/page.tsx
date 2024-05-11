@@ -11,13 +11,60 @@ export default function Checkout() {
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
   const handleConfirmationModalOpen = () => {
-    setIsConfirmationModalOpen(true);
+    // Check if the form is valid before opening the modal
+    if (isFormValid) {
+      setIsConfirmationModalOpen(true);
+    } else {
+      // If form is not valid, you can provide feedback to the user
+      alert("Please fill in all required fields.");
+    }
   };
 
   const handleConfirmationModalClose = () => {
     setIsConfirmationModalOpen(false);
   };
-
+  const barangayOptions = [
+    "Bagumbayan",
+    "Bambang",
+    "Calzada Tipas",
+    "Cembo",
+    "Central Bicutan",
+    "Central Signal Village",
+    "Cembo",
+    "Comembo",
+    "East Rembo",
+    "Fort Bonifacio",
+    "Hagonoy",
+    "Ibayo Tipas",
+    "Katuparan",
+    "Ligid Tipas",
+    "Lower Bicutan",
+    "Maharlika Village",
+    "Napindan",
+    "New Lower Bicutan",
+    "North Daang Hari",
+    "North Signal Village",
+    "Palingon Tipas",
+    "Pembo",
+    "Pinagsama",
+    "Pitogo",
+    "Post Proper Northside",
+    "Post Proper Southside",
+    "Rizal",
+    "San Miguel",
+    "Santa Ana",
+    "South Cembo",
+    "South Daang Hari",
+    "South Signal Village",
+    "Tanyag",
+    "Tuktukan",
+    "Ususan",
+    "Upper Bicutan",
+    "Wawa",
+    "West Rembo",
+    "Western Bicutan",
+  ];
+  
   const handleConfirmationModalConfirm = () => {
     // Implement logic to handle the confirmation (e.g., call your API)
     // You can call the handleSubmit function here if needed
@@ -49,13 +96,22 @@ export default function Checkout() {
     contactNumber: "",
     name: "",
     houseLotBlk: "",
-    barangay: "",
+    barangay: "Bagumbayan",
     paymentMethod: "",
     deliveryDate: "",
 
   });
 
-  const [assembly, setassembly] = useState<boolean>(false);
+  
+  const [isFormValid, setIsFormValid] = useState(false);
+  useEffect(() => {
+    const isFormDataValid = Object.values(formData).every(value => value !== "");
+    setIsFormValid(isFormDataValid);
+  }, [formData]);
+
+  // Function to handle opening the confirmation modal
+ 
+  const [installed, setinstalled] = useState<boolean>(false);
   const [showDiscountImage, setShowDiscountImage] = useState(false); // Add this line
 
   const fileChange = async (event: any) => {
@@ -68,9 +124,26 @@ export default function Checkout() {
     const { name, value, checked, type } = event.target;
   
     if (type === "checkbox") {
-      setassembly(checked);
+      setinstalled(checked);
     } else {
       setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    }
+
+    if (name === "contactNumber") {
+      const numericValue = value.replace(/\D/g, ""); // Remove non-numeric characters
+      if (numericValue.startsWith("63")) {
+        // If the value starts with "63", prepend it with "+"
+        setFormData(prevFormData => ({ ...prevFormData, [name]: `+${numericValue}` }));
+      } else if (numericValue.startsWith("9")) {
+        // If the value starts with "9", prepend it with "+63"
+        setFormData(prevFormData => ({ ...prevFormData, [name]: `+63${numericValue}` }));
+      } else if (numericValue === "") {
+        // Allow clearing the input field
+        setFormData(prevFormData => ({ ...prevFormData, [name]: "" }));
+      }
+      // You can add else condition here to show an error message or take other actions for invalid input
+    } else {
+      setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
     }
   };
   
@@ -93,7 +166,7 @@ export default function Checkout() {
   const handleSubmit = () => {
     createTransaction({
       ...formData,
-      assembly,
+      installed,
       deliveryLocation: location.properties.formatted,
       long: location.properties.lon,
       lat: location.properties.lat,
@@ -107,7 +180,7 @@ export default function Checkout() {
       ],
       discountIdImage: discountIdImage ? discountIdImage : null,
       __t: "Delivery",
-      priceType: "Retailer",
+      priceType: "Customer",
     });
   };
 
@@ -174,12 +247,17 @@ export default function Checkout() {
               onChange={handleChange}
               value={formData.houseLotBlk}
             />
-            <InputField
+        <select
               name="barangay"
-              placeholder="Barangay"
-              onChange={handleChange}
+              id="barangay"
               value={formData.barangay}
-            />
+              onChange={handleChange}
+              className="flex gap-2 justify-center items-center py-4 mt-6 px-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+            >
+              {barangayOptions.map(option => (
+                <option key={option} value={option}>{option}</option>
+              ))}
+            </select>
             
           </div>
         
@@ -214,11 +292,11 @@ export default function Checkout() {
             </div>
           </div>
           <div className="flex flex-col gap-3 justify-center items-center mx-auto pb-10">
-            <p className="text-xl font-bold">Needs to be assembled?</p>
+            <p className="text-xl font-bold">Needs to be installed?</p>
             <div className="flex items-center gap-3">
               <InputField
                 type="checkbox"
-                name="assembly"
+                name="installed"
                 placeholder="Yes"
                 onChange={handleChange}
               />
@@ -232,7 +310,7 @@ export default function Checkout() {
               Avail Discount as PWD/Senior Citizen?
             </p>
             {showDiscountImage && (
-              <div>
+              <div>  
                 {discountIdImage ? (
                   <Image
                     src={discountIdImage ?? ""}

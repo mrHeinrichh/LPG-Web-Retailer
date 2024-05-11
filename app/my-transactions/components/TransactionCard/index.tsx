@@ -18,6 +18,11 @@ function TransactionCard({ delivery, orderNumber, hasFeedback }: ITransactionCar
   const [open, setOpen] = useState<boolean>(false);
   const validStatuses = ["Pending", "Approved", "On Going", "Cancelled", "Completed", "Declined"];
 const showTransaction = validStatuses.includes(delivery.status);
+  const discountPercentage = 20; 
+  const total = delivery.total;
+  const discountAmount = (total * discountPercentage) / 100;
+  const discountedAmount = total - discountAmount;
+  const deductedAmount = total - discountedAmount;
 
   const handleCancelOrder = async () => {
     try {
@@ -71,18 +76,19 @@ const showTransaction = validStatuses.includes(delivery.status);
             ""
           )}
         
-        {delivery.status === "Completed" && hasFeedback === false && (
-            <button
-              className={`text-xl font-light underline-text`}
-              onClick={() => {
-                if (delivery.status === "Completed" && hasFeedback === false) {
-                  router.push(`/feedback?id=${delivery._id}`);
-                }
-              }}
-            >
-              Add Feedback
-            </button>
-          )}
+        {delivery.status === "Completed" && !hasFeedback && (
+  <button
+    className={`text-xl font-light underline-text`}
+    onClick={() => {
+      if (delivery.status === "Completed" && !hasFeedback) {
+        router.push(`/feedback?id=${delivery._id}`);
+      }
+    }}
+  >
+    Add Feedback
+  </button>
+)}
+
         </div>
       </div>
       <div className="flex gap-10">
@@ -107,8 +113,8 @@ const showTransaction = validStatuses.includes(delivery.status);
             <div className="flex flex-col gap-3">
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
-                  <p className="">Assemble</p>
-                  {delivery.assembly ? (
+                  <p className="">Installed</p>
+                  {delivery.installed ? (
                     <FaCheck color="#32CD32" size={15} />
                   ) : (
                     <FaXmark color="#C41E3A" size={15} />
@@ -122,8 +128,21 @@ const showTransaction = validStatuses.includes(delivery.status);
                   Delivery Date: {delivery.updatedAt.toString()}
                 </p>
 
-                <p className="">Total Price: {parseToFiat(delivery.total)}</p>
               </div>
+              <div className="flex items-center justify-between">
+        <p>Discounted Amount ({discountPercentage}%): </p>
+        <p className="">{parseToFiat(discountedAmount)}</p>
+      </div>
+      <div className="flex items-center justify-between">
+        <p>Deducted from Total: </p>
+                <p className="">{parseToFiat(deductedAmount)}</p>
+                
+              </div>
+              <div className="flex items-center justify-between">
+                <p className="">Total Price:</p>
+                <p className="">{parseToFiat(delivery.total)}</p>
+
+                </div>
             </div>
           </div>
         </div>
@@ -158,13 +177,13 @@ const showTransaction = validStatuses.includes(delivery.status);
                       {item.name} ({item.quantity}x)
                     </p>
                     <p className="text-2xl">
-                      {parseToFiat(item.retailerPrice)} / Piece
+                      {parseToFiat(item.customerPrice)} / Piece
                     </p>
                   </div>
                 </div>
 
                 <p className="text-2xl">
-                  {parseToFiat(item.retailerPrice * item.quantity)}
+                  {parseToFiat(item.customerPrice * item.quantity)}
                 </p>
               </div>
             );

@@ -7,6 +7,7 @@ const item: IItemModel = {
   description: "",
   weight: 0,
   stock: 0,
+  customerPrice: 0,
   retailerPrice: 0,
   image: "",
   type: "",

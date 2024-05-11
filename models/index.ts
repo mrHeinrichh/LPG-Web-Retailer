@@ -22,6 +22,7 @@ export interface IItemModel extends IModel {
   description: string;
   weight: number;
   stock: number;
+  customerPrice: number;
   retailerPrice: number;
   image: string;
   type: "Product" | "Accessory" | "";
@@ -31,7 +32,7 @@ export interface IPriceModel<T> extends IModel {
   item: T;
   price: number;
   reason?: string;
-  type: "Retailer" | "Retailer";
+  type: "Customer" | "Retailer";
 }
 
 export interface ITransactionModel extends IModel {
@@ -67,7 +68,7 @@ export interface IDeliveryModel<T, K> extends ITransactionModel {
   houseLotBlk: string;
   paymentMethod: "COD" | "GCASH";
   status: DevliveryStatus;
-  assembly: boolean;
+  installed: boolean;
   deliveryDate: Date | string;
   barangay: string;
   total: number;
@@ -75,6 +76,7 @@ export interface IDeliveryModel<T, K> extends ITransactionModel {
   rider: K;
   // TODO: Add types
   feedback: any[];
+  
   // TODO: Add types
   statuses: any[];
   rating: number;

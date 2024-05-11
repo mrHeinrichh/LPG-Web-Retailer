@@ -57,7 +57,7 @@ export default function Home() {
               <Button
                 type="button"
                 onClick={() => {
-                  authenticate({ ...formData, __t: "Retailer" });
+                  authenticate({ ...formData, __t: "Customer" });
                 }}
               >
                 Sign in

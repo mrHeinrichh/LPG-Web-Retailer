@@ -65,7 +65,7 @@ const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
               <p className="p-2">Item Name: {item.name}</p>
               <p className="p-2">Category: {item.category}</p>
               <p className="p-2">Weight: {item.weight}</p>
-              <p className="p-2">Price: {item.retailerPrice}</p>
+              <p className="p-2">Price: {item.customerPrice}</p>
             </div>
           ))}
         </div>

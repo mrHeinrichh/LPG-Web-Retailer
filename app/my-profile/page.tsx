@@ -62,12 +62,12 @@ export default function MyProfile() {
       const { data } = await patch(`users/${user._id}`, {
         ...formData,
         image,
-        type: "Retailer",
+        type: "Customer",
       });
 
       if (data.status === "success") router.push("/");
     } catch (error) {
-      console.error("Error adding Retailers:", error);
+      console.error("Error adding customers:", error);
     }
   };
 
@@ -77,7 +77,7 @@ export default function MyProfile() {
         appointmentDate: date,
         appointmentStatus: "Pending",
         image,
-        type: "Retailer",
+        type: "Customer",
       });
 
       if (data.status === "success") {
@@ -85,7 +85,7 @@ export default function MyProfile() {
         router.push("/");
       }
     } catch (error) {
-      console.error("Error adding Retailers:", error);
+      console.error("Error adding customers:", error);
     }
   };
 
@@ -96,7 +96,7 @@ export default function MyProfile() {
       });
       if (data.status === "success") router.push("/");
     } catch (error) {
-      console.error("Error adding Retailers:", error);
+      console.error("Error adding customers:", error);
     }
   };
 
