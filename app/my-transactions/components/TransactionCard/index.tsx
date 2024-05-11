@@ -177,13 +177,13 @@ const showTransaction = validStatuses.includes(delivery.status);
                       {item.name} ({item.quantity}x)
                     </p>
                     <p className="text-2xl">
-                      {parseToFiat(item.customerPrice)} / Piece
+                      {parseToFiat(item.retailerPrice)} / Piece
                     </p>
                   </div>
                 </div>
 
                 <p className="text-2xl">
-                  {parseToFiat(item.customerPrice * item.quantity)}
+                  {parseToFiat(item.retailerPrice * item.quantity)}
                 </p>
               </div>
             );

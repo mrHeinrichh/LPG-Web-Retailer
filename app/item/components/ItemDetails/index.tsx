@@ -27,7 +27,7 @@ function ItemDetails({}: IItemDetailsProps) {
 
           <div className="flex flex-col justify-evenly w-2/3">
             <p className="text-2xl font-bold">{item.name}</p>
-            <p className="text-3xl">{parseToFiat(item.customerPrice)}</p>
+            <p className="text-3xl">{parseToFiat(item.retailerPrice)}</p>
             <p className="">{item.description}</p>
             <div className="flex justify-between items-center">
               <p>Stock Available: {item.stock ?? 0}</p>

@@ -16,7 +16,7 @@ function ItemCard({ item, onClick }: IItemCard) {
       </div>
 
       <p className="text-1xl pl-4 pt-4 font-bold">{item.name}</p>
-      <p className="xl pl-4 pb-4">₱{item.customerPrice.toString()}</p>
+      <p className="xl pl-4 pb-4">₱{item.retailerPrice.toString()}</p>
     </div>
   );
 }

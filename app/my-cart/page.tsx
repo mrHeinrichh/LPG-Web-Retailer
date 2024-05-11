@@ -41,9 +41,9 @@ export default function MyCart() {
                   <br />
                   <p>{e.description}</p>
                   <p>Stocks available: {e.stock}</p>
-                  <p>Price: {parseToFiat(e.customerPrice)} / Piece</p>
+                  <p>Price: {parseToFiat(e.retailerPrice)} / Piece</p>
                   <br />
-                  <p> Total: {parseToFiat(e.quantity * e.customerPrice)}</p>
+                  <p> Total: {parseToFiat(e.quantity * e.retailerPrice)}</p>
                 </div>
                 <div className="ml-auto p-9">
                   <input

@@ -22,8 +22,8 @@ export interface IItemModel extends IModel {
   description: string;
   weight: number;
   stock: number;
-  customerPrice: number;
   retailerPrice: number;
+customerPrice: number;
   image: string;
   type: "Product" | "Accessory" | "";
 }

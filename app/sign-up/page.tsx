@@ -44,13 +44,13 @@ export default function Home() {
       const { data } = await post(`users`, {
         ...formData,
         image,
-        __t: "Customer",
+        __t: "Retailer",
       });
 
       console.log(data);
       if (data.status === "success") router.push("/");
     } catch (error) {
-      console.error("Error adding customers:", error);
+      console.error("Error adding retailers:", error);
     }
   };
 

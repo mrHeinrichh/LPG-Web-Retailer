@@ -180,7 +180,7 @@ export default function Checkout() {
       ],
       discountIdImage: discountIdImage ? discountIdImage : null,
       __t: "Delivery",
-      priceType: "Customer",
+      priceType: "Retailer",
     });
   };
 

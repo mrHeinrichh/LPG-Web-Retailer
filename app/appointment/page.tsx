@@ -40,7 +40,7 @@ export default function Appointment() {
       const { data } = await patch(`users/${user._id}`, {
         appointmentDate: date,
         appointmentStatus: "Pending",
-        __t: "Customer",
+        __t: "Retailer",
       });
 
       if (data.status === "success") {
@@ -48,7 +48,7 @@ export default function Appointment() {
         router.push("/");
       }
     } catch (error) {
-      console.error("Error adding customers:", error);
+      console.error("Error adding retailers:", error);
     }
   };
 

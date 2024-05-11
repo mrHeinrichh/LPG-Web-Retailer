@@ -70,7 +70,7 @@ function ForecastChart() {
               <Legend />
               <Line
                 type="monotone"
-                dataKey="customer"
+                dataKey="retailer"
                 stroke="#8884d8"
                 activeDot={{ r: 8 }}
               />
@@ -94,29 +94,29 @@ const getChartData = (
   );
 
   const multiplier = getMutiplier(timeFilter);
-  let curentCustomerValue = 0;
+  let curentretailerValue = 0;
 
   parsedStartDay.forEach((element) => {
-    const customerPrices = prices
+    const retailerPrices = prices
       .filter((e: IPriceModel<string>) => {
         return (
           element.getTime() <=
             getStartDayDate(new Date(e.createdAt)).getTime() &&
           element.getTime() + 86399999 * multiplier >=
             getStartDayDate(new Date(e.createdAt)).getTime() &&
-          e.type === "Customer"
+          e.type === "Retailer"
         );
       })
       .map((e: any) => e.price);
 
-    curentCustomerValue =
-      customerPrices.length == 0
-        ? curentCustomerValue
-        : Math.max(...customerPrices);
+    curentretailerValue =
+      retailerPrices.length == 0
+        ? curentretailerValue
+        : Math.max(...retailerPrices);
 
     temp.push({
       name: `${element.toDateString()}`,
-      customer: curentCustomerValue,
+      retailer: curentretailerValue,
     });
   });
 
